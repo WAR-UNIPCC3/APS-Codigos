@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <!--span inline level element, nao vai jogar ele pra outra linha-->
+        <title><span class="highlight">W.A.R</span>Meteologic</title>
+        <meta charset="utf-8">
+        <!--usado para tornar o site resposivo.-->
+        <meta name ="viewport" content="width=device-width">
+        <link rel="stylesheet" href="css/main.css">
+    </head>
+    <body>
+        <header>
+            <!--id é para algo unico, class é mais pro geral-->
+            <div class="container">
+                <div id="Brand">
+                    <h1><span class="highlight">W.A.R</span> Meteorologic</h1>
+                </div>
+                <nav>
+                    <ul>
+                        <li><a href="about.html">Sobre</a></li>
+                        <!--current apenas na pagina atual-->
+                        <li class="current"><a href="index.html">Home</a></li>
+                    </ul>
+                </nav>
+            </div>  
+        </header>
+        <section id="search">
+            <div class="container">
+                <h1>Teste</h1>
+                <p>Lorem Ipsum é simplesmente uma simulação de texto da indústria tipográfica e de impressos, e vem sendo utilizado desde o século XVI, quando um impressor desconhecido pegou uma bandeja de tipos e os embaralhou para fazer um livro de modelos de tipos. Lorem Ipsum sobreviveu não só a cinco séculos, como também ao salto para a editoração eletrônica, permanecendo essencialmente inalterado. Se popularizou na década de 60, quando a Letraset lançou decalques contendo passagens de Lorem Ipsum, e mais recentemente quando passou a ser integrado a softwares de editoração eletrônica como Aldus PageMaker.</p>
+            </div>
+        </section>
+        <section id="news">
+            <div class="container">
+                <h1>Digite o lugar que deseja saber o clima</h1>
+                <!--parte fornecida pela w3scholl-->
+                <p>Clique para descobrir sua posição.</p>
+                <button onclick="getLocation()" class="btn1">Buscar</button>
+                <div id="mapholder"></div>
+                <script>
+                    var x = document.getElementById("demo");
+                    function getLocation() {
+                        if (navigator.geolocation) {
+                            navigator.geolocation.getCurrentPosition(showPosition, showError);
+                        } else {
+                            x.innerHTML = "Geolocation is not supported by this browser.";
+                        }
+                    }
+
+                    function showPosition(position) {
+                        var latlon = position.coords.latitude + "," + position.coords.longitude;
+                        var img_url = "https://maps.googleapis.com/maps/api/staticmap?center="
+                        +latlon+"&zoom=14&size=400x300&key=AIzaSyBu-916DdpKAjTmJNIgngS6HL_kDIKU0aU";
+                        document.getElementById("mapholder").innerHTML = "<img src='"+img_url+"'>";
+                    }
+                    //To use this code on your website, get a free API key from Google.
+                    //Read more at: https://www.w3schools.com/graphics/google_maps_basic.asp
+
+                    function showError(error) {
+                        switch(error.code) {
+                            case error.PERMISSION_DENIED:
+                                x.innerHTML = "User denied the request for Geolocation."
+                                break;
+                            case error.POSITION_UNAVAILABLE:
+                                x.innerHTML = "Location information is unavailable."
+                                break;
+                            case error.TIMEOUT:
+                                x.innerHTML = "The request to get user location timed out."
+                                break;
+                            case error.UNKNOWN_ERROR:
+                                x.innerHTML = "An unknown error occurred."
+                                break;
+                        }
+                    }
+                </script>
+                <!--fim da parte fornecida pela w3scholl-->
+                
+                <form>
+                    <input type="text" placeholder="Nome do lugar desejado">
+                    <ul>
+                        <li><a href="">Celsius</a></li>
+                        <li><a href="">Fahrenheit</a></li><!--(C−0/100−0)=(F−32/212−32)-->
+                        <li><a href="">Kelvin</a></li><!--K=C+273-->
+                    </ul>
+                    <button type="submit" class="btn1">Pesquisar</button>
+                </form>
+            </div>
+        </section>
+        
+        <section id="mid">
+            <div class="container">
+                <div class="meio">
+                    <h3>Teste</h3>
+                </div>
+                <div class="meio">
+                    <h3>Teste2</h3>
+                </div>
+                <div class="meio">
+                    <h3>Teste3</h3>
+                </div>
+            </div>
+        </section>
+    </body>
+    <footer>
+        <p>W.A.R Meteorologic, Copyright &copy; 2018</p>
+    </footer>
+</html>
