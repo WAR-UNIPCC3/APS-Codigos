@@ -1,0 +1,28 @@
+@media screen and (max-width: 768px){
+	body{
+		background: #cdcdcd;
+	}
+	#main{
+		grid-template-areas: "header" "content" "footer";
+		grid-template-rows: 20vh 70vh 10vh;
+	}
+	header #Brand h1{
+    	padding: 25px;
+    	margin-top: 5%;
+    	margin-left: 90%;
+    	text-align: center;
+	}
+
+	header .highlight{
+    	color: #1e8fcb;
+    	padding: 30px;
+    	font-weight: bold;
+    	text-align: center;
+	}
+	
+	.mainNav{
+		overflow: auto;
+		margin-left: 15%;
+	}
+
+}

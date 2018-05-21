@@ -1,0 +1,134 @@
+/*GLOBAL*/
+*{
+	padding: 0;
+	margin: 0;
+}
+    
+/*por ser div é ., se fosse id seria #*/
+/*por ser responsivo se coloca em %*/
+
+.dark
+{
+    padding: 15px;
+    background: #35424e;
+    color: #ffffff;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+
+#main{
+	display: grid;
+	grid-template-rows: 10vh 84vh 6vh;
+	/*Eu passo a altura que os elementos tenham, o 1º é 15% da altura do meu viewport, vh=viewheight*/
+	grid-template-areas: "header" "content" "footer";
+	/*são repetidos pois quero ter 2 colunas de cada, se fosse 3 eu colocaria 3 e assim por diante.*/
+}
+
+/*HEADER*/
+.mainHeader{
+	grid-area: header;
+	background: #35424a;
+    color: #ffffff;
+    border-bottom:#e8491d 3px solid;
+}
+
+header #Brand
+{
+    float: left;
+    width: 30%;
+}
+
+header #Brand h1
+{
+    padding: 0;
+    margin-top: 5%;
+    text-align: center;
+}
+
+header .highlight{
+    color: #1e8fcb;;
+    font-weight: bold;
+    text-align: center;
+}
+
+.mainNav{
+    width: 70%;
+    margin: auto;
+    padding: 12px;
+}
+
+header a
+{
+    color: #ffffff;
+    text-decoration: none;
+    text-transform: uppercase;
+    font-size: 16px;
+}
+
+header .current a
+{
+    color: #1e8fcb;
+    font-weight: bold;
+    text-align: center;
+}
+
+header ul
+{
+	float: right;
+    margin-right: 10%;
+}
+
+header li
+{
+    display: inline-block;
+    padding: 25px;
+}
+
+header a:hover
+{
+    color: whitesmoke;
+    font-weight: bold;
+}
+
+/*CONTENT*/
+.mainContent{
+	grid-area: content;
+    background:url('../img/Clima-Chuva.png') no-repeat 0 -800px;;
+    color: darkslategrey;
+}
+
+article h1{
+    text-align: center;
+    margin-top: 100px;
+}
+
+article p{
+    padding: 35px;
+    text-align: center;
+}
+
+/*FOOTER*/
+.mainFooter{
+	grid-area: footer;
+    color: #ffffff;
+    background-color: #e8491d;
+    text-align: center;
+}
+
+footer p{
+    margin-top: 20px;
+}
+
+/*SOBRE*/
+#sob{
+}
+
+.mainSobre{
+    width: 80%;
+    margin: auto;
+    overflow: hidden;/*se alguma sair da div, nao cria um scrollbar para puxar a pagina, entao ele esconde*/
+}
+
+#sidebar{
+}
