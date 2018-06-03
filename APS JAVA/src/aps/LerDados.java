@@ -1,42 +1,25 @@
 package aps;
 
+import Apresentacao.frmPrincipal;
+import SerialComunicacao.Main;
 import gnu.io.SerialPort;
 import gnu.io.SerialPortEvent;
 import gnu.io.SerialPortEventListener;
 import java.io.BufferedReader;
-import java.io.ByteArrayOutputStream;
 import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.io.PrintStream;
-import java.io.PrintWriter;
-import java.io.StringWriter;
 
 public class LerDados extends absPropriedades implements Runnable,SerialPortEventListener
 {
 
-    public LerDados(String Porta, int baudrate, int timeout)
-    {
-        super(Porta, baudrate, timeout);
-    }
+    public LerDados()
+    {}
 
-    
-    public LerDados(SerialPort porta)
+    public LerDados(SerialPort porta, SerialPortEvent ev)
     {
         super(porta);
         Executar();
     }
 
-    public LerDados(String Dados)
-    {
-        super(Dados);
-    }
-
-    public LerDados(BufferedReader input)
-    {
-        super(input);
-    }
-    
     @Override
     public void Executar()
     {
@@ -46,8 +29,7 @@ public class LerDados extends absPropriedades implements Runnable,SerialPortEven
             porta.addEventListener(this);
         }
         catch (Exception e)
-        {
-        }
+        {}
                 
     porta.notifyOnDataAvailable(true);
     
@@ -58,8 +40,7 @@ public class LerDados extends absPropriedades implements Runnable,SerialPortEven
             run();
         }
         catch (Exception e)
-        {
-        }
+        {}
     }   
 
     @Override
@@ -106,24 +87,21 @@ public class LerDados extends absPropriedades implements Runnable,SerialPortEven
                         System.out.println("Erro de leitura serial: " + ioe);
                     }
                 }
-                
-                StringWriter sw = new StringWriter();
-                PrintWriter out = new PrintWriter(sw);
-                setTemperatura(new String(bufferLeitura));
-                System.out.println(getTemperatura());
-                
+                        Dadoslidos = new String(bufferLeitura);  
+                        Main dado = new Main(this.Dadoslidos);
+                        {
+                        }
             break;
-        }
+        } 
     }
-   
-    
     @Override
     public void run()
     {
-    }
-    @Override
-    public String toString()
-    {
-              return this.temperatura;
+                try
+        {
+            Thread.sleep(5);
+        }
+        catch(Exception e)
+        {}
     }
 }

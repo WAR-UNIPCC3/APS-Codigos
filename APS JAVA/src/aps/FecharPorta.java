@@ -6,12 +6,11 @@ import java.io.InputStream;
 public class FecharPorta extends absPropriedades
 {
 
-    public FecharPorta(String Porta, int baudrate, int timeout)
+    public FecharPorta(int baudrate, int timeout, String Porta)
     {
-        super(Porta, baudrate, timeout);
+        super(baudrate, timeout, Porta);
     }
 
-    
     public FecharPorta(SerialPort porta)
     {
         super(porta);

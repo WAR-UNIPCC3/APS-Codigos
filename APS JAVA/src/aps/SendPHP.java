@@ -1,61 +1,39 @@
 package aps;
+import aps.LerDados;
+import java.io.FileWriter;
+import java.io.IOException;
+import org.json.simple.JSONObject;
 
-import java.io.DataOutputStream;
-import java.net.HttpURLConnection;
-import java.net.URL;
-import java.util.Map;
-import java.util.Set;
+public class SendPHP extends absPropriedades
+{
 
-
-public class SendPHP {
-
-    public void doSend(String url, Map<String, String> data) 
-            throws Exception 
+    public SendPHP()
     {
-        URL siteUrl = new URL(url);
-        HttpURLConnection conn = (HttpURLConnection) siteUrl.openConnection();
-        conn.setRequestMethod("POST");
-        conn.setDoOutput(true);
-        conn.setDoInput(true);        
+	//Cria um Objeto JSON
+        JSONObject jsonObject = new JSONObject();
+        LerDados escrita = new LerDados();
+        {
+            this.Dadoslidos = escrita.Dadoslidos;
+        }
+		
+	FileWriter writeFile = null;
 
-        DataOutputStream out = new DataOutputStream(conn.getOutputStream());
-
-        Set<String> keys = data.keySet();
-        Iterator keyIter = keys.iterator();
-        String content = "";        
-        for(int i=0; keyIter.hasNext(); i++) {
-            Object key = keyIter.next();
-            if(i!=0) {
-                content += "&";
+	try{
+		writeFile = new FileWriter("C:\\Users\\wthia\\Desktop\\Ciencia da Computação - UNIP\\APS\\APS 3\\saida.json");
+		//Escreve no arquivo conteudo do Objeto JSON
+		writeFile.write(jsonObject.toJSONString());
+		writeFile.close();
             }
-            content += key + "=" + URLEncoder.encode(data.get(key), "UTF-8");
-        }
-
-        System.out.println(content);
-        out.writeBytes(content);    
-
-        out.flush();
-        out.close();
-
-        BufferedReader in = new BufferedReader(new InputStreamReader(conn.getInputStream()));
-        System.out.println("\n\nResultado da Pagina: \n\n");
-        String line = "";
-        while((line=in.readLine())!=null) {
-            System.out.println(line);
-        }
-
+	catch(IOException e)
+            {
+                e.printStackTrace();
+            }
+                //Imprimne na Tela o Objeto JSON para vizualização
+                System.out.println(jsonObject);
+    
     }
-
-    public static void main(String[] args) throws Exception{        
-
-        Map<String, String> data = new HashMap<String, String>();
-        data.put("username", "usuario");
-        data.put("password", "senha");        
-
-        SubmitHTML obj = new SubmitHTML();    
-
-        obj.doSubmit("http://localhost/submitHTML/loginhandler.php", data);        
-
+    @Override
+    public void Executar()
+    {
     }
-
 }

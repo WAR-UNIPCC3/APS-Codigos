@@ -15,28 +15,33 @@ public class Main extends absPropriedades
      */
     public Main()
     {
-        
     }
-    public Main(String Porta, int baudrate, int timeout)
+
+    public Main(int baudrate, int timeout, String Porta)
     {
-        super(Porta, baudrate, timeout);
+        super(baudrate, timeout, Porta);
     }
+    
 
     public Main(SerialPort porta)
     {
         super(porta);
     }
 
+    public Main(String Dadoslidos)
+    {
+        super(Dadoslidos);
+        Executar();
+    }
 
     @Override
     public void Executar()
     {
-        
+        System.out.println(this.Dadoslidos);
     }
     
     public static void main(String[] args) 
-    {
-        
+    { 
     }
     public String obterPorta()
     {

@@ -3,8 +3,13 @@ import SerialComunicacao.Main;
 import aps.FecharPorta;
 import aps.LerDados;
 import aps.Porta;
+import aps.SendPHP;
 import aps.absPropriedades;
 import javax.swing.JOptionPane;
+import javax.swing.JTextArea;
+import gnu.io.SerialPort;
+import gnu.io.SerialPortEvent;
+import gnu.io.SerialPortEventListener;
 
 /**
  *
@@ -12,16 +17,16 @@ import javax.swing.JOptionPane;
  */
 public class frmPrincipal extends javax.swing.JDialog
 {   
-
     /**
      * Creates new form frmPrincipal
      */
+    
+    
     public frmPrincipal(java.awt.Frame parent, boolean modal)
     {
         super(parent, modal);
         initComponents();
     }
-
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -36,8 +41,7 @@ public class frmPrincipal extends javax.swing.JDialog
         btnDesconectar = new javax.swing.JButton();
         lblURL = new javax.swing.JLabel();
         txfIP = new javax.swing.JTextField();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        txaDados = new javax.swing.JTextArea();
+        txArea = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("CONEXÃO ARDUINO");
@@ -72,10 +76,6 @@ public class frmPrincipal extends javax.swing.JDialog
 
         lblURL.setText("URL:");
 
-        txaDados.setColumns(20);
-        txaDados.setRows(5);
-        jScrollPane1.setViewportView(txaDados);
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -93,10 +93,10 @@ public class frmPrincipal extends javax.swing.JDialog
                         .addGap(111, 111, 111)
                         .addComponent(btnDesconectar)))
                 .addGap(47, 47, 47))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 369, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(26, 26, 26))
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(txArea)
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -105,8 +105,8 @@ public class frmPrincipal extends javax.swing.JDialog
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnConectar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnDesconectar))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 188, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
+                .addComponent(txArea, javax.swing.GroupLayout.DEFAULT_SIZE, 176, Short.MAX_VALUE)
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblURL)
@@ -120,35 +120,37 @@ public class frmPrincipal extends javax.swing.JDialog
 
     private void btnConectarActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_btnConectarActionPerformed
     {//GEN-HEADEREND:event_btnConectarActionPerformed
-
     }//GEN-LAST:event_btnConectarActionPerformed
 
     private void btnConectarMouseClicked(java.awt.event.MouseEvent evt)//GEN-FIRST:event_btnConectarMouseClicked
     {//GEN-HEADEREND:event_btnConectarMouseClicked
         try
         {
-            Porta abrir = new Porta("COM4", 9600, 0);
+            Porta abrir = new Porta(9600, 0, "COM4");
             {
             abrir.Executar();
             }
-        
-            LerDados leitura = new LerDados(Main.porta);
-            {
-                leitura.Executar();
-            }
         }
+        
         catch (Exception e)
         {
             JOptionPane.showMessageDialog(null, "Porta COM4 não conectada.");
         }
         
-        
+        LerDados leitura = new LerDados();
+        {
+            leitura.Executar();
+        }
+        Main receber = new Main();
+        {
+            txArea.setText(receber.Dadoslidos);
+        }
         
     }//GEN-LAST:event_btnConectarMouseClicked
 
     private void btnDesconectarMouseClicked(java.awt.event.MouseEvent evt)//GEN-FIRST:event_btnDesconectarMouseClicked
     {//GEN-HEADEREND:event_btnDesconectarMouseClicked
-        FecharPorta fechar = new FecharPorta("COM4", 9600, 0);
+        FecharPorta fechar = new FecharPorta(9600, 0, "COM4");
         {
             fechar.Executar();
         }
@@ -215,9 +217,19 @@ public class frmPrincipal extends javax.swing.JDialog
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnConectar;
     private javax.swing.JButton btnDesconectar;
-    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel lblURL;
-    private javax.swing.JTextArea txaDados;
+    private javax.swing.JTextField txArea;
     private javax.swing.JTextField txfIP;
     // End of variables declaration//GEN-END:variables
+
+    public javax.swing.JTextField getTxArea()
+    {
+        return txArea;
+    }
+
+    public void setTxArea(javax.swing.JTextField txArea)
+    {
+        this.txArea = txArea;
+    }
+
 }
