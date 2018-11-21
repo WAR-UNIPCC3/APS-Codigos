@@ -1,0 +1,8 @@
+[
+        {"codigo":"Temperatura", 
+            "valor": "40%"},
+        {"codigo":"Umidade",
+            "valor": "35%"},
+        {"codigo":"Precipitação", 
+            "valor": "40%"}
+]

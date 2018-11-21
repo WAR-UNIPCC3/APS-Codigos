@@ -15,6 +15,8 @@
 
     <!-- Custom styles for this template -->
     <link href="css/scrolling-nav.css" rel="stylesheet">
+    
+    <link href="dados APS.json" rel="stylesheet">
 
   </head>
 
@@ -38,27 +40,19 @@
     </nav>
 
     <header class="bg-primary text-white">
-<table>
-  <tr>
-    <th>Precipitação de chuva</th>
-    <th>Umidade</th>
-    <th>Temperatura</th>
-  </tr>
-  <tr>
-    <td>-------</td>
-    <td>-------</td>
-    <td>-------</td>
-  </tr>
-  <tr>
-    <th>Pressão</th>
-    <th>Altura</th>
-  </tr>
-  <tr>
-    <th>--------</th>
-    <th>--------</th>
-  </tr>
-</table>
-
+    <?php
+    // Atribui o conteúdo do arquivo para variável $arquivo
+    $arquivo = file_get_contents('dados APS.json');
+ 
+    // Decodifica o formato JSON e retorna um Objeto
+    $json = json_decode($arquivo);
+ 
+    // Loop para percorrer o Objeto
+    foreach($json as $registro):
+        echo 'Código: '. $registro->codigo.  ' '
+            . '- Valor: ' . $registro->valor .'<br>';
+    endforeach;
+    ?>
     </header>
 
     <section id="about">
